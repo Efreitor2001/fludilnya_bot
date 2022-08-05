@@ -10,10 +10,13 @@ dp = Dispatcher(bot)
 async def delete_messages(message: types.Message):
     check = 0
     is_admin = await bot.get_chat_administrators(message.chat.id)
+    wl = ['https://t.me/c/', 'https://github.com']
     for i in range(len(is_admin)):
         if int(message.from_user.id) == int(is_admin[i]['user']['id']):
             check = 1
-
+    for i in wl:
+        if i in message.text:
+            check = 1
     if check == 0:
         for entity in message.entities:
             if entity.type in ["url", "text_link"]:
