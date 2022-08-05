@@ -2,7 +2,7 @@ from aiogram import Bot, types
 from aiogram.dispatcher import Dispatcher
 from aiogram.utils import executor
 
-bot = Bot('TOKEN')
+bot = Bot('5439181005:AAGjlNaqXx5toLp7aDiSfBSl7OIbkI13KY0')
 dp = Dispatcher(bot)
 
 
