@@ -8,9 +8,16 @@ dp = Dispatcher(bot)
 
 @dp.message_handler(content_types=['text'])
 async def delete_messages(message: types.Message):
-    for entity in message.entities:
-        if entity.type in ["url", "text_link"]:
-            await message.delete()
+    check = 0
+    is_admin = await bot.get_chat_administrators(message.chat.id)
+    for i in range(len(is_admin)):
+        if int(message.from_user.id) == int(is_admin[i]['user']['id']):
+            check = 1
+
+    if check == 0:
+        for entity in message.entities:
+            if entity.type in ["url", "text_link"]:
+                await message.delete()
 
 
 print('run')
