@@ -3,7 +3,6 @@ aiohttp==3.8.1
 aiosignal==1.2.0
 anyio==3.6.1
 APScheduler==3.9.1
-apturl==0.5.2
 async-timeout==4.0.2
 attrs==22.1.0
 autopep8==1.6.0
