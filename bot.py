@@ -11,7 +11,7 @@ async def del_new(message):
     await bot.delete_message(message.chat.id, message.message_id)
 
 
-@dp.message_handler(content_types=['any'])
+@dp.message_handler(content_types=types.ContentTypes.ANY)
 async def delete_messages(message: types.Message):
     check = 0
     is_admin = await bot.get_chat_administrators(message.chat.id)
