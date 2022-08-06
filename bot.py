@@ -24,7 +24,7 @@ async def delete_messages(message: types.Message):
             check = 1
     if check == 0:
         for entity in message.entities:
-            if entity.type in ["url", "text_link"]:
+            if entity.type in ["url", "text_link", "hlink"]:
                 await message.delete()
 
 
