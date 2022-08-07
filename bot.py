@@ -2,7 +2,7 @@ from aiogram.utils import executor
 from aiogram import Bot, types
 from aiogram.dispatcher import Dispatcher
 
-bot = Bot('5490678266:AAGHhzuse7TRRojzitQir_qZVp-t3u4VWok')
+bot = Bot('5439181005:AAGjlNaqXx5toLp7aDiSfBSl7OIbkI13KY0')
 dp = Dispatcher(bot)
 
 
@@ -28,7 +28,7 @@ async def delete_messages(message: types.Message):
             if i in message.text:
                 check = 1
     if check == 0:
-        if message.content_type == 'photo':
+        if message.content_type == 'photo' or message.content_type == 'photo':
             for caption_entity in message.caption_entities:
                 if caption_entity.type in ["url", "text_link", "hlink"]:
                     await message.delete()
