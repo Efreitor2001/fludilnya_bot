@@ -19,7 +19,7 @@ async def delete_messages(message: types.Message):
     for i in range(len(is_admin)):
         if int(message.from_user.id) == int(is_admin[i]['user']['id']):
             check = 1
-    if message.content_type == 'photo' or message.content_type == 'video':
+    if message.content_type == 'photo' or message.content_type == 'video' or message.content_type == 'document':
         for i in wl:
             if i in message.caption:
                 check = 1
@@ -28,7 +28,7 @@ async def delete_messages(message: types.Message):
             if i in message.text:
                 check = 1
     if check == 0:
-        if message.content_type == 'photo' or message.content_type == 'video':
+        if message.content_type == 'photo' or message.content_type == 'video' or message.content_type == 'document':
             for caption_entity in message.caption_entities:
                 if caption_entity.type in ["url", "text_link", "hlink"]:
                     await message.delete()
