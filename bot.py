@@ -28,7 +28,7 @@ async def delete_messages(message: types.Message):
             if i in message.text:
                 check = 1
     if check == 0:
-        if message.content_type == 'photo' or message.content_type == 'photo':
+        if message.content_type == 'photo' or message.content_type == 'video':
             for caption_entity in message.caption_entities:
                 if caption_entity.type in ["url", "text_link", "hlink"]:
                     await message.delete()
