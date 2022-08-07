@@ -2,7 +2,7 @@ from aiogram.utils import executor
 from aiogram import Bot, types
 from aiogram.dispatcher import Dispatcher
 
-bot = Bot('5439181005:AAGjlNaqXx5toLp7aDiSfBSl7OIbkI13KY0')
+bot = Bot('5490678266:AAGHhzuse7TRRojzitQir_qZVp-t3u4VWok')
 dp = Dispatcher(bot)
 
 
@@ -19,7 +19,7 @@ async def delete_messages(message: types.Message):
     for i in range(len(is_admin)):
         if int(message.from_user.id) == int(is_admin[i]['user']['id']):
             check = 1
-    if message.content_type == 'photo':
+    if message.content_type == 'photo' or message.content_type == 'video':
         for i in wl:
             if i in message.caption:
                 check = 1
