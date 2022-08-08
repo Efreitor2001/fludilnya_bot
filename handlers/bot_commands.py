@@ -61,13 +61,14 @@ async def ban(message):
                                                     f'{message.reply_to_message.from_user.first_name}</a>, '
                                                     f'<b>живи... Пока что...</b>', parse_mode='html')
     else:
+        name1 = message.from_user.get_mention(as_html=True)
         dt = datetime.now() + timedelta(hours=2)
         timestamp = dt.timestamp()
-        await bot.send_message(message.chat.id,
-                               f'<b>Суицидник <a href="tg://user?id={message.reply_to_message.from_user.id}></a> '
-                               f'получает 2 часа блокировки!!!</b>', parse_mode='html')
         await bot.restrict_chat_member(message.chat.id, message.reply_to_message.from_user.id,
                                        types.ChatPermissions(False), until_date=timestamp)
+        message.reply(message.chat.id,
+                      f'<b>Суицидник <a href="tg://user?id={name1}></a> '
+                      f'получает 2 часа блокировки!!!</b>', parse_mode='html')
 
 
 # @dp.message_handler(commands=['разбан', 'unban'], commands_prefix='!', is_chat_admin=True)
