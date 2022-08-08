@@ -38,7 +38,7 @@ async def ban(message):
                         f'\n| <b>Срок наказания:</b> {muteint} {mutetype} ⏰\n| <b>Причина:</b> {comment}',
                         parse_mode='html')
                 else:
-                    await message.answer_sticker(
+                    await message.reply_sticker(
                         r'CAACAgIAAxkBAAEFghxi8W0p7mwCLbiqRRbPAW1HATUxogACbBwAAlJ3CEtsxj7hHdfO4CkE')
             elif mutetype == "м" or mutetype == "минут" or mutetype == "минуты":
                 dt = datetime.now() + timedelta(minutes=muteint)
@@ -52,7 +52,7 @@ async def ban(message):
                         f'\n| <b>Срок наказания:</b> {muteint} {mutetype} ⏰\n| <b>Причина:</b> {comment}',
                         parse_mode='html')
                 else:
-                    await message.answer_sticker(
+                    await message.reply_sticker(
                         r'CAACAgIAAxkBAAEFghxi8W0p7mwCLbiqRRbPAW1HATUxogACbBwAAlJ3CEtsxj7hHdfO4CkE')
             elif mutetype == "д" or mutetype == "дней" or mutetype == "день":
                 dt = datetime.now() + timedelta(days=muteint)
@@ -66,7 +66,7 @@ async def ban(message):
                         f'\n| <b>Срок наказания:</b> {muteint} {mutetype} ⏰\n| <b>Причина:</b> {comment}',
                         parse_mode='html')
                 else:
-                    await message.answer_sticker(
+                    await message.reply_sticker(
                         r'CAACAgIAAxkBAAEFghxi8W0p7mwCLbiqRRbPAW1HATUxogACbBwAAlJ3CEtsxj7hHdfO4CkE')
         else:
             await bot.send_message(message.chat.id, f'<a href="tg://user?id='
