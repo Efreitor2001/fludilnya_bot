@@ -27,7 +27,7 @@ async def ban(message):
         msg = await bot.send_poll(chat_id=message.chat.id,
                                   question=f"Забанить {message.reply_to_message.from_user.first_name}?",
                                   options=["Да", "Нет"])
-        await asyncio.sleep(60)
+        await asyncio.sleep(5)
         poll = await bot.stop_poll(chat_id=message.chat.id, message_id=msg.message_id)
         if int(poll['options'][0]["voter_count"]) > int(poll['options'][1]["voter_count"]) and \
                 int(poll['options'][0]["voter_count"]) > 4:
@@ -35,31 +35,39 @@ async def ban(message):
             timestamp = dt.timestamp()
             await bot.restrict_chat_member(message.chat.id, message.reply_to_message.from_user.id,
                                            types.ChatPermissions(False), until_date=timestamp)
-            await message.reply(
+            del_mes = await message.reply(
                 f'| <b>Решение было принято:</b> {name1}\n| <b>Жертва:</b> <a href="tg://user?id='
                 f'{message.reply_to_message.from_user.id}">{message.reply_to_message.from_user.first_name}</a>'
                 f'\n| <b>Срок наказания:</b> 2 часа ⏰\n| <b>Причина:</b> {comment}',
                 parse_mode='html')
+            await asyncio.sleep(5)
+            await del_mes.delete()
         else:
-            await bot.send_message(message.chat.id, f'<a href="tg://user?id='
-                                                    f'{message.reply_to_message.from_user.id}">'
-                                                    f'{message.reply_to_message.from_user.first_name}</a>, '
-                                                    f'<b>живи... Пока что...</b>', parse_mode='html')
+            del_mes = await bot.send_message(message.chat.id, f'<a href="tg://user?id='
+                                                              f'{message.reply_to_message.from_user.id}">'
+                                                              f'{message.reply_to_message.from_user.first_name}</a>, '
+                                                              f'<b>живи... Пока что...</b>', parse_mode='html')
+            await asyncio.sleep(5)
+            await del_mes.delete()
     else:
         dt = datetime.now() + timedelta(hours=2)
         timestamp = dt.timestamp()
         await bot.restrict_chat_member(message.chat.id, message.reply_to_message.from_user.id,
                                        types.ChatPermissions(False), until_date=timestamp)
-        await bot.send_message(message.chat.id, f'<b>Суицидник </b><a href="tg://user?id='
-                                                f'{message.reply_to_message.from_user.id}">'
-                                                f'{message.reply_to_message.from_user.first_name}</a>, '
-                                                f'<b>получает 2 часа блокировки!!!</b>', parse_mode='html')
+        del_mes = await bot.send_message(message.chat.id, f'<b>Суицидник </b><a href="tg://user?id='
+                                                          f'{message.reply_to_message.from_user.id}">'
+                                                          f'{message.reply_to_message.from_user.first_name}</a>, '
+                                                          f'<b>получает 2 часа блокировки!!!</b>', parse_mode='html')
+        await asyncio.sleep(5)
+        await del_mes.delete()
 
 
 # @dp.message_handler(commands=['разбан', 'unban'], commands_prefix='!', is_chat_admin=True)
 async def unban(message: types.Message):
     await bot.promote_chat_member(message.chat.id, message.reply_to_message.from_user.id)
-    await bot.send_message(message.chat.id, 'Done')
+    del_mes = await bot.send_message(message.chat.id, 'Done')
+    await asyncio.sleep(5)
+    await del_mes.delete()
 
 
 def register_handlers_bot_commands(dp: Dispatcher):
