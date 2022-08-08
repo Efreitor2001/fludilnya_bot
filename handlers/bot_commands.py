@@ -18,47 +18,56 @@ async def ban(message):
     except IndexError:
         await message.reply('Не хватает аргументов!\nПример:\n`!бан 1 ч причина`')
         return
-    msg = await bot.send_poll(chat_id=message.chat.id,
-                              question=f"Забанить {message.reply_to_message.from_user.first_name}?",
-                              options=["Да", "Нет"])
-    await asyncio.sleep(20)
-    poll = await bot.stop_poll(chat_id=message.chat.id, message_id=msg.message_id)
-    if int(poll['options'][0]["voter_count"]) > int(poll['options'][1]["voter_count"]):
-        if mutetype == "ч" or mutetype == "часов" or mutetype == "час":
-            dt = datetime.now() + timedelta(hours=muteint)
-            timestamp = dt.timestamp()
-            await bot.restrict_chat_member(message.chat.id, message.reply_to_message.from_user.id,
-                                           types.ChatPermissions(False), until_date=timestamp)
-            await message.reply(
-                f'| <b>Решение было принято:</b> {name1}\n| <b>Жертва:</b> <a href="tg://user?id='
-                f'{message.reply_to_message.from_user.id}">{message.reply_to_message.from_user.first_name}</a>\n'
-                f'| <b>Срок наказания:</b> {muteint} {mutetype} ⏰\n| <b>Причина:</b> {comment}',
-                parse_mode='html')
-        elif mutetype == "м" or mutetype == "минут" or mutetype == "минуты":
-            dt = datetime.now() + timedelta(minutes=muteint)
-            timestamp = dt.timestamp()
-            await bot.restrict_chat_member(message.chat.id, message.reply_to_message.from_user.id,
-                                           types.ChatPermissions(False), until_date=timestamp)
-            await message.reply(
-                f'| <b>Решение было принято:</b> {name1}\n| <b>Жертва:</b> <a href="tg://user?id='
-                f'{message.reply_to_message.from_user.id}">{message.reply_to_message.from_user.first_name}</a>'
-                f'\n| <b>Срок наказания:</b> {muteint} {mutetype} ⏰\n| <b>Причина:</b> {comment}',
-                parse_mode='html')
-        elif mutetype == "д" or mutetype == "дней" or mutetype == "день":
-            dt = datetime.now() + timedelta(days=muteint)
-            timestamp = dt.timestamp()
-            await bot.restrict_chat_member(message.chat.id, message.reply_to_message.from_user.id,
-                                           types.ChatPermissions(False), until_date=timestamp)
-            await message.reply(
-                f'| <b>Решение было принято:</b> {name1}\n| <b>Жертва:</b> <a href="tg://user?id='
-                f'{message.reply_to_message.from_user.id}">{message.reply_to_message.from_user.first_name}</a>\n'
-                f'⏰| <b>Срок наказания:</b> {muteint} {mutetype}\n| <b>Причина:</b> {comment}',
-                parse_mode='html')
+    if message.reply_to_message.from_user != message.from_user.id:
+        msg = await bot.send_poll(chat_id=message.chat.id,
+                                  question=f"Забанить {message.reply_to_message.from_user.first_name}?",
+                                  options=["Да", "Нет"])
+        await asyncio.sleep(20)
+        poll = await bot.stop_poll(chat_id=message.chat.id, message_id=msg.message_id)
+        if int(poll['options'][0]["voter_count"]) > int(poll['options'][1]["voter_count"]):
+            if mutetype == "ч" or mutetype == "часов" or mutetype == "час":
+                dt = datetime.now() + timedelta(hours=muteint)
+                timestamp = dt.timestamp()
+                await bot.restrict_chat_member(message.chat.id, message.reply_to_message.from_user.id,
+                                               types.ChatPermissions(False), until_date=timestamp)
+                await message.reply(
+                    f'| <b>Решение было принято:</b> {name1}\n| <b>Жертва:</b> <a href="tg://user?id='
+                    f'{message.reply_to_message.from_user.id}">{message.reply_to_message.from_user.first_name}</a>\n'
+                    f'| <b>Срок наказания:</b> {muteint} {mutetype} ⏰\n| <b>Причина:</b> {comment}',
+                    parse_mode='html')
+            elif mutetype == "м" or mutetype == "минут" or mutetype == "минуты":
+                dt = datetime.now() + timedelta(minutes=muteint)
+                timestamp = dt.timestamp()
+                await bot.restrict_chat_member(message.chat.id, message.reply_to_message.from_user.id,
+                                               types.ChatPermissions(False), until_date=timestamp)
+                await message.reply(
+                    f'| <b>Решение было принято:</b> {name1}\n| <b>Жертва:</b> <a href="tg://user?id='
+                    f'{message.reply_to_message.from_user.id}">{message.reply_to_message.from_user.first_name}</a>'
+                    f'\n| <b>Срок наказания:</b> {muteint} {mutetype} ⏰\n| <b>Причина:</b> {comment}',
+                    parse_mode='html')
+            elif mutetype == "д" or mutetype == "дней" or mutetype == "день":
+                dt = datetime.now() + timedelta(days=muteint)
+                timestamp = dt.timestamp()
+                await bot.restrict_chat_member(message.chat.id, message.reply_to_message.from_user.id,
+                                               types.ChatPermissions(False), until_date=timestamp)
+                await message.reply(
+                    f'| <b>Решение было принято:</b> {name1}\n| <b>Жертва:</b> <a href="tg://user?id='
+                    f'{message.reply_to_message.from_user.id}">{message.reply_to_message.from_user.first_name}</a>\n'
+                    f'⏰| <b>Срок наказания:</b> {muteint} {mutetype}\n| <b>Причина:</b> {comment}',
+                    parse_mode='html')
+        else:
+            await bot.send_message(message.chat.id, f'<a href="tg://user?id='
+                                                    f'{message.reply_to_message.from_user.id}">'
+                                                    f'{message.reply_to_message.from_user.first_name}</a>, '
+                                                    f'<b>живи... Пока что...</b>', parse_mode='html')
     else:
-        await bot.send_message(message.chat.id, f'<a href="tg://user?id='
-                                                f'{message.reply_to_message.from_user.id}">'
-                                                f'{message.reply_to_message.from_user.first_name}</a>, '
-                                                f'<b>живи... Пока что...</b>', parse_mode='html')
+        dt = datetime.now() + timedelta(hours=2)
+        timestamp = dt.timestamp()
+        await bot.send_message(message.chat.id,
+                               f'<b>Суицидник <a href="tg://user?id={message.reply_to_message.from_user.id}></a> '
+                               f'получает 2 часа блокировки!!!</b>', parse_mode='html')
+        await bot.restrict_chat_member(message.chat.id, message.reply_to_message.from_user.id,
+                                       types.ChatPermissions(False), until_date=timestamp)
 
 
 # @dp.message_handler(commands=['разбан', 'unban'], commands_prefix='!', is_chat_admin=True)
