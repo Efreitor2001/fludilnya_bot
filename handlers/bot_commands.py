@@ -22,7 +22,7 @@ async def ban(message):
         msg = await bot.send_poll(chat_id=message.chat.id,
                                   question=f"Забанить {message.reply_to_message.from_user.first_name}?",
                                   options=["Да", "Нет"])
-        await asyncio.sleep(60)
+        await asyncio.sleep(20)
         poll = await bot.stop_poll(chat_id=message.chat.id, message_id=msg.message_id)
         if int(poll['options'][0]["voter_count"]) > int(poll['options'][1]["voter_count"]):  # and \
             # int(poll['options'][0]["voter_count"]) > 5:
@@ -34,9 +34,12 @@ async def ban(message):
                                                    types.ChatPermissions(False), until_date=timestamp)
                     await message.reply(
                         f'| <b>Решение было принято:</b> {name1}\n| <b>Жертва:</b> <a href="tg://user?id='
-                        f'{message.reply_to_message.from_user.id}">{message.reply_to_message.from_user.first_name}</a>\n'
-                        f'| <b>Срок наказания:</b> {muteint} {mutetype} ⏰\n| <b>Причина:</b> {comment}',
+                        f'{message.reply_to_message.from_user.id}">{message.reply_to_message.from_user.first_name}</a>'
+                        f'\n| <b>Срок наказания:</b> {muteint} {mutetype} ⏰\n| <b>Причина:</b> {comment}',
                         parse_mode='html')
+                else:
+                    await message.answer_sticker(
+                        r'CAACAgIAAxkBAAEFghxi8W0p7mwCLbiqRRbPAW1HATUxogACbBwAAlJ3CEtsxj7hHdfO4CkE')
             elif mutetype == "м" or mutetype == "минут" or mutetype == "минуты":
                 dt = datetime.now() + timedelta(minutes=muteint)
                 timestamp = dt.timestamp()
@@ -48,6 +51,9 @@ async def ban(message):
                         f'{message.reply_to_message.from_user.id}">{message.reply_to_message.from_user.first_name}</a>'
                         f'\n| <b>Срок наказания:</b> {muteint} {mutetype} ⏰\n| <b>Причина:</b> {comment}',
                         parse_mode='html')
+                else:
+                    await message.answer_sticker(
+                        r'CAACAgIAAxkBAAEFghxi8W0p7mwCLbiqRRbPAW1HATUxogACbBwAAlJ3CEtsxj7hHdfO4CkE')
             elif mutetype == "д" or mutetype == "дней" or mutetype == "день":
                 dt = datetime.now() + timedelta(days=muteint)
                 timestamp = dt.timestamp()
@@ -56,9 +62,12 @@ async def ban(message):
                                                    types.ChatPermissions(False), until_date=timestamp)
                     await message.reply(
                         f'| <b>Решение было принято:</b> {name1}\n| <b>Жертва:</b> <a href="tg://user?id='
-                        f'{message.reply_to_message.from_user.id}">{message.reply_to_message.from_user.first_name}</a>\n'
-                        f'⏰| <b>Срок наказания:</b> {muteint} {mutetype}\n| <b>Причина:</b> {comment}',
+                        f'{message.reply_to_message.from_user.id}">{message.reply_to_message.from_user.first_name}</a>'
+                        f'\n| <b>Срок наказания:</b> {muteint} {mutetype} ⏰\n| <b>Причина:</b> {comment}',
                         parse_mode='html')
+                else:
+                    await message.answer_sticker(
+                        r'CAACAgIAAxkBAAEFghxi8W0p7mwCLbiqRRbPAW1HATUxogACbBwAAlJ3CEtsxj7hHdfO4CkE')
         else:
             await bot.send_message(message.chat.id, f'<a href="tg://user?id='
                                                     f'{message.reply_to_message.from_user.id}">'
