@@ -66,9 +66,9 @@ async def ban(message):
         timestamp = dt.timestamp()
         await bot.restrict_chat_member(message.chat.id, message.reply_to_message.from_user.id,
                                        types.ChatPermissions(False), until_date=timestamp)
-        message.reply(message.chat.id,
-                      f'<b>Суицидник <a href="tg://user?id={name1}></a> '
-                      f'получает 2 часа блокировки!!!</b>', parse_mode='html')
+        await message.reply(message.chat.id,
+                            f'<b>Суицидник <a href="tg://user?id={name1}></a> '
+                            f'получает 2 часа блокировки!!!</b>', parse_mode='html')
 
 
 # @dp.message_handler(commands=['разбан', 'unban'], commands_prefix='!', is_chat_admin=True)
