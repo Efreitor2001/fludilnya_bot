@@ -14,7 +14,10 @@ async def ban(message):
             check = 1
     name1 = message.from_user.get_mention(as_html=True)
     if not message.reply_to_message:
-        await message.reply("Эта команда должна быть ответом на сообщение!")
+        del_mes = await message.reply("Эта команда должна быть ответом на сообщение!")
+        await asyncio.sleep(5)
+        await del_mes.delete()
+
         return
     try:
         comment = " ".join(message.text.split()[1:])
@@ -22,7 +25,10 @@ async def ban(message):
         await message.reply('Не хватает аргументов!\nПример:\n`!бан причина`')
         return
     if check == 1:
-        await message.reply('<b>Это выше моих полномочий, Десу</b>', parse_mode='html')
+        del_mes = await message.reply('<b>Это выше моих полномочий, Десу</b>', parse_mode='html')
+        await asyncio.sleep(5)
+        await del_mes.delete()
+
     elif message.reply_to_message.from_user.id != message.from_user.id:
         msg = await bot.send_poll(chat_id=message.chat.id,
                                   question=f"Забанить {message.reply_to_message.from_user.first_name}?",
