@@ -18,7 +18,7 @@ async def ban(message):
     except IndexError:
         await message.reply('Не хватает аргументов!\nПример:\n`!бан 1 ч причина`')
         return
-    if message.reply_to_message.from_user != message.from_user.id:
+    if message.reply_to_message.from_user.id != message.from_user.id:
         msg = await bot.send_poll(chat_id=message.chat.id,
                                   question=f"Забанить {message.reply_to_message.from_user.first_name}?",
                                   options=["Да", "Нет"])
