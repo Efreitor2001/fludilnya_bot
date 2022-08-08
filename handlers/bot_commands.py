@@ -27,10 +27,10 @@ async def ban(message):
         msg = await bot.send_poll(chat_id=message.chat.id,
                                   question=f"Забанить {message.reply_to_message.from_user.first_name}?",
                                   options=["Да", "Нет"])
-        await asyncio.sleep(5)
+        await asyncio.sleep(60)
         poll = await bot.stop_poll(chat_id=message.chat.id, message_id=msg.message_id)
-        if int(poll['options'][0]["voter_count"]) > int(poll['options'][1]["voter_count"]):  # and \
-            # int(poll['options'][0]["voter_count"]) > 4:
+        if int(poll['options'][0]["voter_count"]) > int(poll['options'][1]["voter_count"]) and \
+                int(poll['options'][0]["voter_count"]) > 4:
             dt = datetime.now() + timedelta(hours=2)
             timestamp = dt.timestamp()
             await bot.restrict_chat_member(message.chat.id, message.reply_to_message.from_user.id,
