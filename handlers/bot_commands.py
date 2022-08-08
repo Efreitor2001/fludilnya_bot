@@ -17,7 +17,7 @@ async def ban(message):
         await message.reply("Эта команда должна быть ответом на сообщение!")
         return
     try:
-        comment = " ".join(message.text.split()[0:])
+        comment = " ".join(message.text.split()[1:])
     except IndexError:
         await message.reply('Не хватает аргументов!\nПример:\n`!бан причина`')
         return
