@@ -7,6 +7,11 @@ from aiogram import types, Dispatcher
 
 # @dp.message_handler(commands=['бан', 'ban'], commands_prefix='!')
 async def ban(message):
+    check = 0
+    is_admin = await bot.get_chat_administrators(message.chat.id)
+    for i in range(len(is_admin)):
+        if int(message.from_user.id) == int(is_admin[i]['user']['id']):
+            check = 1
     name1 = message.from_user.get_mention(as_html=True)
     if not message.reply_to_message:
         await message.reply("Эта команда должна быть ответом на сообщение!")
@@ -16,7 +21,7 @@ async def ban(message):
     except IndexError:
         await message.reply('Не хватает аргументов!\nПример:\n`!бан причина`')
         return
-    if message.reply_to_message.from_user.id.is_admin:
+    if check == 1:
         await message.reply('<b>Это выше моих полномочий, Десу</b>', parse_mode='html')
     elif message.reply_to_message.from_user.id != message.from_user.id:
         msg = await bot.send_poll(chat_id=message.chat.id,
