@@ -21,7 +21,7 @@ async def ban(message):
     msg = await bot.send_poll(chat_id=message.chat.id,
                               question=f"Забанить {message.reply_to_message.from_user.first_name}?",
                               options=["Да", "Нет"])
-    await asyncio.sleep(10)
+    await asyncio.sleep(20)
     poll = await bot.stop_poll(chat_id=message.chat.id, message_id=msg.message_id)
     if int(poll['options'][0]["voter_count"]) > int(poll['options'][1]["voter_count"]):
         if mutetype == "ч" or mutetype == "часов" or mutetype == "час":
