@@ -10,7 +10,7 @@ async def ban(message):
     check = 0
     is_admin = await bot.get_chat_administrators(message.chat.id)
     for i in range(len(is_admin)):
-        if int(message.from_user.id) == int(is_admin[i]['user']['id']):
+        if int(message.reply_to_message.from_user.id) == int(is_admin[i]['user']['id']):
             check = 1
     name1 = message.from_user.get_mention(as_html=True)
     if not message.reply_to_message:
