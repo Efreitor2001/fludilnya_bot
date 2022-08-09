@@ -32,15 +32,11 @@ async def delete_messages(message: types.Message):
             for entity in message.entities:
                 if entity.type in ["url", "text_link", "hlink"]:
                     await message.delete()
-
-
-async def gitignore(message: types.Message):
     ck1 = 0
     ck2 = 0
     check1 = ['gitignore', 'git ignore', 'гитигнор', 'гит игнор']
     check2 = ['пришлите', 'скиньте', 'дайте', 'скинь']
     s = message.text.lower()
-    print(s)
     for i in check1:
         if i in s:
             ck1 = 1
@@ -53,5 +49,4 @@ async def gitignore(message: types.Message):
 
 def register_handlers_bot_handlers(dp: Dispatcher):
     dp.register_message_handler(del_new, content_types=['new_chat_members'])
-    dp.register_message_handler(gitignore, content_types=['text'])
     dp.register_message_handler(delete_messages, content_types=['any'])
