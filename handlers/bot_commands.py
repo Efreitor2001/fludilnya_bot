@@ -79,8 +79,9 @@ async def ban(message):
 async def unban(message: types.Message):
     await bot.promote_chat_member(message.chat.id, message.reply_to_message.from_user.id)
     del_mes = await bot.send_message(message.chat.id, 'Done')
-    await asyncio.sleep(300)
+    await asyncio.sleep(10)
     await del_mes.delete()
+    await message.delete()
 
 
 def register_handlers_bot_commands(dp: Dispatcher):
