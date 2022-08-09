@@ -34,6 +34,22 @@ async def delete_messages(message: types.Message):
                     await message.delete()
 
 
+async def gitignore(message):
+    ck1 = 0
+    ck2 = 0
+    check1 = ['gitignore', 'git ignore', 'гитигнор', 'гит игнор']
+    check2 = ['пришлите', 'скиньте', 'дайте', 'скинь']
+    for i in check1:
+        if i in message.text.lower():
+            ck1 = 1
+    for i in check2:
+        if i in message.text.lower():
+            check = 1
+    if ck1 == 1 and ck2 == 1:
+        await message.reply(f'Лови https://t.me/c/1745662062/9222')
+
+
 def register_handlers_bot_handlers(dp: Dispatcher):
     dp.register_message_handler(del_new, content_types=['new_chat_members'])
     dp.register_message_handler(delete_messages, content_types=['any'])
+    dp.register_message_handler(gitignore, content_types=['text'])
