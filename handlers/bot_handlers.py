@@ -39,11 +39,13 @@ async def gitignore(message):
     ck2 = 0
     check1 = ['gitignore', 'git ignore', 'гитигнор', 'гит игнор']
     check2 = ['пришлите', 'скиньте', 'дайте', 'скинь']
+    s = message.text
+    s = s.lower()
     for i in check1:
-        if i in message.text.lower():
+        if i in s:
             ck1 = 1
-    for i in check2:
-        if i in message.text.lower():
+    for j in check2:
+        if j in s:
             ck2 = 1
     if ck1 == 1 and ck2 == 1:
         await message.reply(f'Лови https://t.me/c/1745662062/9222')
