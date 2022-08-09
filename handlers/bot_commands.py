@@ -56,7 +56,7 @@ async def ban(message):
                                                               f'<b>живи... Пока что...</b>', parse_mode='html')
             await asyncio.sleep(5)
             await del_mes.delete()
-            await msg.message_id.delete()
+            await msg.delete()
     else:
         dt = datetime.now() + timedelta(hours=2)
         timestamp = dt.timestamp()
