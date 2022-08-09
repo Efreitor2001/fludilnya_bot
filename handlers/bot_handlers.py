@@ -53,5 +53,5 @@ async def gitignore(message: types.Message):
 
 def register_handlers_bot_handlers(dp: Dispatcher):
     dp.register_message_handler(del_new, content_types=['new_chat_members'])
-    dp.register_message_handler(delete_messages, content_types=['any'])
     dp.register_message_handler(gitignore, content_types=['text'])
+    dp.register_message_handler(delete_messages, content_types=['any'])
