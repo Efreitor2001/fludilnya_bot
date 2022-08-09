@@ -44,7 +44,7 @@ async def gitignore(message):
             ck1 = 1
     for i in check2:
         if i in message.text.lower():
-            check = 1
+            ck2 = 1
     if ck1 == 1 and ck2 == 1:
         await message.reply(f'Лови https://t.me/c/1745662062/9222')
 
