@@ -15,7 +15,7 @@ async def ban(message):
     name1 = message.from_user.get_mention(as_html=True)
     if not message.reply_to_message:
         del_mes = await message.reply("Эта команда должна быть ответом на сообщение!")
-        await asyncio.sleep(5)
+        await asyncio.sleep(300)
         await del_mes.delete()
         await message.delete()
 
@@ -27,7 +27,7 @@ async def ban(message):
         return
     if check == 1:
         del_mes = await message.reply('<b>Это выше моих полномочий, Десу</b>', parse_mode='html')
-        await asyncio.sleep(5)
+        await asyncio.sleep(300)
         await del_mes.delete()
         await message.delete()
 
@@ -35,7 +35,7 @@ async def ban(message):
         msg = await bot.send_poll(chat_id=message.chat.id,
                                   question=f"Забанить {message.reply_to_message.from_user.first_name}?",
                                   options=["Да", "Нет"])
-        await asyncio.sleep(5)
+        await asyncio.sleep(60)
         poll = await bot.stop_poll(chat_id=message.chat.id, message_id=msg.message_id)
         if int(poll['options'][0]["voter_count"]) > int(poll['options'][1]["voter_count"]) and \
                 int(poll['options'][0]["voter_count"]) > 4:
@@ -48,7 +48,7 @@ async def ban(message):
                 f'{message.reply_to_message.from_user.id}">{message.reply_to_message.from_user.first_name}</a>'
                 f'\n| <b>Срок наказания:</b> 2 часа ⏰\n| <b>Причина:</b> {comment}',
                 parse_mode='html')
-            await asyncio.sleep(5)
+            await asyncio.sleep(300)
             await del_mes.delete()
             await msg.delete()
             await message.delete()
@@ -57,7 +57,7 @@ async def ban(message):
                                                               f'{message.reply_to_message.from_user.id}">'
                                                               f'{message.reply_to_message.from_user.first_name}</a>, '
                                                               f'<b>живи... Пока что...</b>', parse_mode='html')
-            await asyncio.sleep(5)
+            await asyncio.sleep(300)
             await del_mes.delete()
             await msg.delete()
             await message.delete()
@@ -70,7 +70,7 @@ async def ban(message):
                                                           f'{message.reply_to_message.from_user.id}">'
                                                           f'{message.reply_to_message.from_user.first_name}</a>, '
                                                           f'<b>получает 2 часа блокировки!!!</b>', parse_mode='html')
-        await asyncio.sleep(5)
+        await asyncio.sleep(300)
         await del_mes.delete()
         await message.delete()
 
@@ -79,7 +79,7 @@ async def ban(message):
 async def unban(message: types.Message):
     await bot.promote_chat_member(message.chat.id, message.reply_to_message.from_user.id)
     del_mes = await bot.send_message(message.chat.id, 'Done')
-    await asyncio.sleep(5)
+    await asyncio.sleep(300)
     await del_mes.delete()
 
 
