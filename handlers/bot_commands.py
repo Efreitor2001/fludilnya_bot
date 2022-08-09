@@ -77,11 +77,22 @@ async def ban(message):
 
 # @dp.message_handler(commands=['разбан', 'unban'], commands_prefix='!', is_chat_admin=True)
 async def unban(message: types.Message):
-    await bot.promote_chat_member(message.chat.id, message.reply_to_message.from_user.id)
-    del_mes = await bot.send_message(message.chat.id, 'Done')
-    await asyncio.sleep(10)
-    await del_mes.delete()
-    await message.delete()
+    check = 0
+    is_admin = await bot.get_chat_administrators(message.chat.id)
+    for i in range(len(is_admin)):
+        if int(message.reply_to_message.from_user.id) == int(is_admin[i]['user']['id']):
+            check = 1
+    if check == 1:
+        del_mes = await message.reply('<b>Это выше моих полномочий, Десу</b>', parse_mode='html')
+        await asyncio.sleep(10)
+        await del_mes.delete()
+        await message.delete()
+    else:
+        await bot.promote_chat_member(message.chat.id, message.reply_to_message.from_user.id)
+        del_mes = await bot.send_message(message.chat.id, 'Done')
+        await asyncio.sleep(10)
+        await del_mes.delete()
+        await message.delete()
 
 
 def register_handlers_bot_commands(dp: Dispatcher):
