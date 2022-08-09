@@ -17,6 +17,7 @@ async def ban(message):
         del_mes = await message.reply("Эта команда должна быть ответом на сообщение!")
         await asyncio.sleep(5)
         await del_mes.delete()
+        await message.delete()
 
         return
     try:
@@ -28,6 +29,7 @@ async def ban(message):
         del_mes = await message.reply('<b>Это выше моих полномочий, Десу</b>', parse_mode='html')
         await asyncio.sleep(5)
         await del_mes.delete()
+        await message.delete()
 
     elif message.reply_to_message.from_user.id != message.from_user.id:
         msg = await bot.send_poll(chat_id=message.chat.id,
@@ -48,7 +50,8 @@ async def ban(message):
                 parse_mode='html')
             await asyncio.sleep(5)
             await del_mes.delete()
-            await msg.message_id.delete()
+            await msg.delete()
+            await message.delete()
         else:
             del_mes = await bot.send_message(message.chat.id, f'<a href="tg://user?id='
                                                               f'{message.reply_to_message.from_user.id}">'
@@ -57,6 +60,7 @@ async def ban(message):
             await asyncio.sleep(5)
             await del_mes.delete()
             await msg.delete()
+            await message.delete()
     else:
         dt = datetime.now() + timedelta(hours=2)
         timestamp = dt.timestamp()
@@ -68,6 +72,7 @@ async def ban(message):
                                                           f'<b>получает 2 часа блокировки!!!</b>', parse_mode='html')
         await asyncio.sleep(5)
         await del_mes.delete()
+        await message.delete()
 
 
 # @dp.message_handler(commands=['разбан', 'unban'], commands_prefix='!', is_chat_admin=True)
