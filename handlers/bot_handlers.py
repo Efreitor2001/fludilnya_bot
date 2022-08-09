@@ -34,7 +34,7 @@ async def delete_messages(message: types.Message):
                     await message.delete()
 
 
-async def gitignore(message):
+async def gitignore(message: types.Message):
     ck1 = 0
     ck2 = 0
     check1 = ['gitignore', 'git ignore', 'гитигнор', 'гит игнор']
