@@ -48,7 +48,7 @@ async def ban(message):
                 parse_mode='html')
             await asyncio.sleep(5)
             await del_mes.delete()
-            await poll.delete()
+            await msg.delete()
         else:
             del_mes = await bot.send_message(message.chat.id, f'<a href="tg://user?id='
                                                               f'{message.reply_to_message.from_user.id}">'
