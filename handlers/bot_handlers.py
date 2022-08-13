@@ -11,10 +11,11 @@ async def del_new(message):
 async def delete_messages(message: types.Message):
     check = 0
     is_admin = await bot.get_chat_administrators(message.chat.id)
+    # print(is_admin)
     wl = ['https://t.me/c/', 'github.com']
     for i in range(len(is_admin)):
         if int(message.from_user.id) == int(is_admin[i]['user']['id']):
-            check = 1
+            check = 0
     if message.content_type == 'photo' or message.content_type == 'video' or message.content_type == 'document':
         for i in wl:
             if i in message.caption:
@@ -27,15 +28,31 @@ async def delete_messages(message: types.Message):
         if message.content_type == 'photo' or message.content_type == 'video' or message.content_type == 'document':
             for caption_entity in message.caption_entities:
                 if caption_entity.type in ["url", "text_link", "hlink"]:
-                    mess = message
                     for i in range(len(is_admin)):
-                        await bot.send_message(is_admin[i]['user']['id'], mess)
+                        if not is_admin[i]['user']['is_bot']:
+                            try:
+                                await bot.send_message(is_admin[i]['user']['id'],
+                                                       f'Сообщение: {message.text}\n\n'
+                                                       f'Отправитель: <a href="tg://user?id='
+                                                       f'{message.reply_to_message.from_user.id}">'
+                                                       f'{message.reply_to_message.from_user.first_name}</a>'
+                                                       f'\n\nСсылка на сообщение: {message.url}')
+                            except:
+                                i += 1
         else:
             for entity in message.entities:
                 if entity.type in ["url", "text_link", "hlink"]:
-                    mess = message
                     for i in range(len(is_admin)):
-                        await bot.send_message(is_admin[i]['user']['id'], mess)
+                        if not is_admin[i]['user']['is_bot']:
+                            try:
+                                await bot.send_message(is_admin[i]['user']['id'],
+                                                       f'Сообщение: {message.text}\n\n'
+                                                       f'Отправитель: <a href="tg://user?id='
+                                                       f'{message.reply_to_message.from_user.id}">'
+                                                       f'{message.reply_to_message.from_user.first_name}</a>'
+                                                       f'\n\nСсылка на сообщение: {message.url}')
+                            except:
+                                i += 1
     ck1 = 0
     ck2 = 0
     check1 = ['gitignore', 'git ignore', 'гитигнор', 'гит игнор']
