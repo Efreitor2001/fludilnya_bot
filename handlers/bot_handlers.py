@@ -27,11 +27,15 @@ async def delete_messages(message: types.Message):
         if message.content_type == 'photo' or message.content_type == 'video' or message.content_type == 'document':
             for caption_entity in message.caption_entities:
                 if caption_entity.type in ["url", "text_link", "hlink"]:
-                    await message.delete()
+                    mess = message
+                    for i in range(len(is_admin)):
+                        await bot.send_message(is_admin[i]['user']['id'], mess)
         else:
             for entity in message.entities:
                 if entity.type in ["url", "text_link", "hlink"]:
-                    await message.delete()
+                    mess = message
+                    for i in range(len(is_admin)):
+                        await bot.send_message(is_admin[i]['user']['id'], mess)
     ck1 = 0
     ck2 = 0
     check1 = ['gitignore', 'git ignore', 'гитигнор', 'гит игнор']
