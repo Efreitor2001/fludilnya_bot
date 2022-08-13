@@ -16,7 +16,8 @@ async def delete_messages(message: types.Message):
     for i in range(len(is_admin)):
         if int(message.from_user.id) == int(is_admin[i]['user']['id']):
             check = 0
-    if message.content_type == 'photo' or message.content_type == 'video' or message.content_type == 'document':
+    if message.content_type == 'photo' or message.content_type == 'video' or message.content_type == 'document' or \
+            message.content_type == 'audio':
         for i in wl:
             if i in message.caption:
                 check = 1
@@ -26,14 +27,15 @@ async def delete_messages(message: types.Message):
                 check = 1
     if check == 0:
         count = 0
-        if message.content_type == 'photo' or message.content_type == 'video' or message.content_type == 'document':
+        if message.content_type == 'photo' or message.content_type == 'video' or message.content_type == 'document' or \
+                message.content_type == 'audio':
             for caption_entity in message.caption_entities:
                 if caption_entity.type in ["url", "text_link", "hlink"] and count == 0:
                     for i in range(len(is_admin)):
                         if not is_admin[i]['user']['is_bot']:
                             try:
                                 await bot.send_message(is_admin[i]['user']['id'],
-                                                       f'<b>Сообщение: </b>{message.text}\n\n'
+                                                       f'<b>Сообщение: </b>{message.caption}\n\n'
                                                        f'<b>Отправитель: </b><a href="tg://user?id='
                                                        f'{message.from_user.id}">'
                                                        f'{message.from_user.full_name}</a>'
