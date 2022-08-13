@@ -25,32 +25,37 @@ async def delete_messages(message: types.Message):
             if i in message.text:
                 check = 1
     if check == 0:
+        count = 0
         if message.content_type == 'photo' or message.content_type == 'video' or message.content_type == 'document':
             for caption_entity in message.caption_entities:
-                if caption_entity.type in ["url", "text_link", "hlink"]:
+                if caption_entity.type in ["url", "text_link", "hlink"] and count == 0:
                     for i in range(len(is_admin)):
                         if not is_admin[i]['user']['is_bot']:
                             try:
                                 await bot.send_message(is_admin[i]['user']['id'],
-                                                       f'Сообщение: {message.text}\n\n'
-                                                       f'Отправитель: <a href="tg://user?id='
-                                                       f'{message.reply_to_message.from_user.id}">'
-                                                       f'{message.reply_to_message.from_user.first_name}</a>'
-                                                       f'\n\nСсылка на сообщение: {message.url}')
+                                                       f'<b>Сообщение: </b>{message.text}\n\n'
+                                                       f'<b>Отправитель: </b><a href="tg://user?id='
+                                                       f'{message.from_user.id}">'
+                                                       f'{message.from_user.full_name}</a>'
+                                                       f'\n\n<b>Ссылка на сообщение: </b>{message.url}',
+                                                       parse_mode="html")
+                                count += 1
                             except:
                                 i += 1
         else:
             for entity in message.entities:
-                if entity.type in ["url", "text_link", "hlink"]:
+                if entity.type in ["url", "text_link", "hlink"] and count == 0:
                     for i in range(len(is_admin)):
                         if not is_admin[i]['user']['is_bot']:
                             try:
                                 await bot.send_message(is_admin[i]['user']['id'],
-                                                       f'Сообщение: {message.text}\n\n'
-                                                       f'Отправитель: <a href="tg://user?id='
-                                                       f'{message.reply_to_message.from_user.id}">'
-                                                       f'{message.reply_to_message.from_user.first_name}</a>'
-                                                       f'\n\nСсылка на сообщение: {message.url}')
+                                                       f'<b>Сообщение: </b>{message.text}\n\n'
+                                                       f'<b>Отправитель: </b><a href="tg://user?id='
+                                                       f'{message.from_user.id}">'
+                                                       f'{message.from_user.full_name}</a>'
+                                                       f'\n\n<b>Ссылка на сообщение: </b>{message.url}',
+                                                       parse_mode="html")
+                                count += 1
                             except:
                                 i += 1
     ck1 = 0
