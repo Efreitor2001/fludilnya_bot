@@ -79,7 +79,8 @@ def bad_words(message):
             for g in ok:
                 for z in s.lower().replace('ё', 'е').replace('a', 'а').replace('y', 'у').replace('e', 'е') \
                         .replace('x', 'х').replace('c', 'с').replace('p', 'р').replace('k', 'к').replace('b', 'б') \
-                        .replace('z', 'з').replace('o', 'о').replace('.', '').replace('"', '').split():
+                        .replace('z', 'з').replace('o', 'о').replace('.', '').replace('"', '')\
+                        .replace('-', '').split():
                     res = str(i + j + g)
                     if res == z:
                         check = True
