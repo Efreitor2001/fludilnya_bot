@@ -2,6 +2,28 @@ from aiogram import types, Dispatcher
 from create_bot import bot
 
 
+def bad_words(message):
+    check = False
+    bw = ['блядь', 'бляха-муха', 'бля', 'бля буду', 'блядство', 'блядун', 'бляди', 'блядское', 'блядская', 'блядские',
+          'блядский', 'блядища', 'блядовать', 'выблядок', 'ебёныть', 'ёбнулся', 'ёб', 'ебать', 'ебанутый',
+          'ебать-копать', 'ебать', 'ебаться', 'ёбырь', 'ебальник', 'ебало', 'ебло', 'ёбнуть', 'ебануть', 'ёбнутый',
+          'выебнулся', 'наебнуться', 'выебнуться', 'долбоёб', 'заеблись', 'заебатый', 'настоебенить', 'настоебать',
+          'ебаквакнуться', 'наебать', 'ебысь', 'еблысь', 'наёбка', 'подъебать', 'подъёб', 'подъёбка',
+          'поебать', 'поебень', 'поеботина', 'коноебля', 'коноёбиться', 'ебля', 'уёбище', 'бомбоуёбище', 'уёбывать',
+          'съёбывать', 'изъебнуться', 'изъёб', 'невъебенно', 'заебатый', 'заебательский', 'разъебай', 'разъёба',
+          'поёбка', 'еблан', 'ебанат', 'туебень', 'ёбово', 'еботятина', 'ебливый', 'ебучий', 'злоебучий', 'косоёбиться',
+          'шароёбиться', 'пиздец', 'пизда', 'спизжены', 'пизды', 'пизд', 'опиздол', 'пиздо', 'хуёвый', 'хуёво', 'хуета',
+          'нехуй', 'хуйня', 'хуетень', 'хуёвина', 'хуётина', 'хули', 'хуячить', 'хуярить', 'хуярыжить', 'охуенный',
+          'охуительный', 'охуевательный', 'охуенный', 'охуеть', 'ни хуя', 'нихуя', 'не хуя', 'нехуя', 'по хую', 'похую',
+          'по хуй', 'похуй', 'хуяк',
+          'похуист', 'похуизм', 'на хуй', 'нахуй', 'хуила', 'хуебяка', 'хуйнуть', 'семихуй', 'полухуй', 'хуемполбия',
+          'хуесос']
+    for i in bw:
+        if i in message.text.lower():
+            check = True
+    return check
+
+
 # @dp.message_handler(content_types=['new_chat_members'])
 async def del_new(message):
     await bot.delete_message(message.chat.id, message.message_id)
@@ -9,6 +31,12 @@ async def del_new(message):
 
 # @dp.message_handler(content_types=['any'])
 async def delete_messages(message: types.Message):
+    if bad_words(message) is True:
+        await message.reply(f'<b><a href="tg://user?id={message.from_user.id}">{message.from_user.first_name}</a>, '
+                            f'у нас не матерятся!</b>', parse_mode='html')
+        await message.delete()
+        await bot.send_sticker(message.chat.id,
+                               'CAACAgIAAxkBAAEFjwABYvjHWC8yVvt-gQcTL8wytAVmRnMAAjosAAL8eDlLFcEUfmcSuwkpBA')
     check = 0
     is_admin = await bot.get_chat_administrators(message.chat.id)
     wl = ['https://t.me/c/', 'github.com']

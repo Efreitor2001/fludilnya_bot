@@ -66,10 +66,10 @@ async def ban(message):
         timestamp = dt.timestamp()
         await bot.restrict_chat_member(message.chat.id, message.reply_to_message.from_user.id,
                                        types.ChatPermissions(False), until_date=timestamp)
-        del_mes = await bot.send_message(message.chat.id, f'<b>Суицидник </b><a href="tg://user?id='
+        del_mes = await bot.send_message(message.chat.id, f'<a href="tg://user?id='
                                                           f'{message.reply_to_message.from_user.id}">'
-                                                          f'{message.reply_to_message.from_user.first_name}</a>, '
-                                                          f'<b>получает 2 часа блокировки!!!</b>', parse_mode='html')
+                                                          f'{message.reply_to_message.from_user.first_name}</a> '
+                                                          f'<b>уходит учить PHP!!!</b>', parse_mode='html')
         await asyncio.sleep(300)
         await del_mes.delete()
         await message.delete()
