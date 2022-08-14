@@ -11,9 +11,10 @@ def bad_words(message):
     else:
         mestype = message.text
     s1 = ''
-    for i in str(mestype):
-        if i != i + 1:
-            s1 += i
+    for i in range(len(mestype) - 1):
+        if mestype[i] != mestype[i + 1]:
+            s1 += mestype[i]
+    s1 += mestype[i + 1]
     pri = 'в, во, до, вы, пра, из, изо, пред, по, предо, па, пере, без, бес, низ, нис, раз, рас, через, черес, при,' \
           ' пре, о,  , у, под, пад, подъ, падъ, подь, падь, да, от, ат, вы, на, наст, про, ' \
           'за, а'.replace(' ', '').split(',')
