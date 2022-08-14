@@ -10,6 +10,10 @@ def bad_words(message):
         mestype = message.caption
     else:
         mestype = message.text
+    s1 = ''
+    for i in str(mestype):
+        if i != i + 1:
+            s1 += i
     pri = 'в, во, до, вы, пра, из, изо, пред, по, предо, па, пере, без, бес, низ, нис, раз, рас, через, черес, при,' \
           ' пре, о,  , у, под, пад, подъ, падъ, подь, падь, да, от, ат, вы, на, наст, про, ' \
           'за, а'.replace(' ', '').split(',')
@@ -73,14 +77,14 @@ def bad_words(message):
          ' пиздюшк, охуе, заеби, пидр, дроч, хуенн, пезд, пизд, ебст'.replace(' ', '').split(',')
     ok = 'а, я, о, е, ь, ы, и, у, ю, ой, ей, ом, ем, асина, ина, ище,  , ий, ый, ца, ся, ься, ща, нуть, нутся, нуться' \
          'ось, ясь, ысь, ись, еш, ешь, ш, шь, ила, ено, енно, ню, ну, ня, ил, ли, ась, ям, ' \
-         'ая'.replace(' ', '').split(',')
-    s = re.sub("[$|@&*.,/?;:`~()^%'<>_+={}№—]", "", mestype)
+         'ая, ный'.replace(' ', '').split(',')
+    s = re.sub("[$|@&*.,/?;:`~()^%'<>_+={}№—]", "", s1)
     for i in pri:
         for j in bw:
             for g in ok:
                 for z in s.lower().replace('ё', 'е').replace('a', 'а').replace('y', 'у').replace('e', 'е') \
                         .replace('x', 'х').replace('c', 'с').replace('p', 'р').replace('k', 'к').replace('b', 'б') \
-                        .replace('z', 'з').replace('o', 'о').replace('.', '').replace('"', '')\
+                        .replace('z', 'з').replace('o', 'о').replace('.', '').replace('"', '') \
                         .replace('-', '').split():
                     res = str(i + j + g)
                     if res == z:
