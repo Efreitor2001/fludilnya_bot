@@ -81,7 +81,8 @@ def bad_words(message):
          'шараёбиться, шлюха, шлюхой, шлюшка, ябывает, еб'.replace(' ', '').split(',')
     for i in bw:
         if i in message.text.lower().replace('ё', 'е').replace('a', 'а').replace('y', 'у').replace('e', 'е') \
-                .replace('x', 'х').replace('c', 'с').replace('p', 'р').replace('k', 'к'):
+                .replace('x', 'х').replace('c', 'с').replace('p', 'р').replace('k', 'к').replace('b', 'б')\
+                .replace('z', 'з'):
             check = True
             return check
 
