@@ -4,6 +4,8 @@ from create_bot import bot
 
 def bad_words(message):
     check = False
+    pri = 'в, во, до, вы, пра, из, изо, пред, по, предо, па, пере, без, бес, низ, нис, раз, рас, через, черес, при,' \
+          ' пре, о,  , у'.replace(' ', '').split(',')
     bw = '6ля, 6лядь, 6лять, b3ъeб, cock, cunt, e6aль, ebal, eblan, eбaл, eбaть, eбyч, eбать, eбёт, eблантий, fuck,' \
          ' fucker, fucking, xyёв, xyй, xyя, xуе,xуй, xую, zaeb, zaebal, zaebali, zaebat, архипиздрит, ахуел, ахуеть,' \
          ' бздение, бздеть, бздех, бздецы, бздит, бздицы, бздло, бзднуть, бздун, бздунья, бздюха, бздюшка, бздюшко,' \
@@ -61,13 +63,17 @@ def bad_words(message):
          'хуесос, хуесоска, хуета, хуетень, хуею, хуи, хуй, хуйком, хуйло, хуйня, хуйрик, хуище, хуля, хую, хуюл, ' \
          'хуя, хуяк, хуякать, хуякнуть, хуяра, хуясе, хуячить, целка, чмо, чмошник, чмырь, шалава, шалавой, ' \
          'шараёбиться, шлюха, шлюхой, шлюшка, ябывает, еб, ебя, пидорасина'.replace(' ', '').split(',')
-    for i in bw:
-        for j in message.text.lower().replace('ё', 'е').replace('a', 'а').replace('y', 'у').replace('e', 'е') \
-                .replace('x', 'х').replace('c', 'с').replace('p', 'р').replace('k', 'к').replace('b', 'б') \
-                .replace('z', 'з').replace('o', 'о').split():
-            if i == j:
-                check = True
-                return check
+    ok = 'а, я, о, е, ь, ы, и, у, ю, ой, ей, ом, ем, асина, ина, ище,  '.replace(' ', '').split(',')
+    for i in pri:
+        for j in bw:
+            for g in ok:
+                for z in message.text.lower().replace('ё', 'е').replace('a', 'а').replace('y', 'у').replace('e', 'е') \
+                        .replace('x', 'х').replace('c', 'с').replace('p', 'р').replace('k', 'к').replace('b', 'б') \
+                        .replace('z', 'з').replace('o', 'о').split():
+                    res = str(i + j + g)
+                    if res == z:
+                        check = True
+                        return check
 
     return check
 
