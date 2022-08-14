@@ -11,13 +11,12 @@ async def del_new(message):
 async def delete_messages(message: types.Message):
     check = 0
     is_admin = await bot.get_chat_administrators(message.chat.id)
-    # print(is_admin)
     wl = ['https://t.me/c/', 'github.com']
     for i in range(len(is_admin)):
         if int(message.from_user.id) == int(is_admin[i]['user']['id']):
             check = 0
     if message.content_type == 'photo' or message.content_type == 'video' or message.content_type == 'document' or \
-            message.content_type == 'audio':
+            message.content_type == 'audio' or message.content_type == 'album':
         for i in wl:
             if i in message.caption:
                 check = 1
@@ -28,11 +27,12 @@ async def delete_messages(message: types.Message):
     if check == 0:
         count = 0
         if message.content_type == 'photo' or message.content_type == 'video' or message.content_type == 'document' or \
-                message.content_type == 'audio':
+                message.content_type == 'audio' or message.content_type == 'album':
             for caption_entity in message.caption_entities:
                 if caption_entity.type in ["url", "text_link", "hlink"] and count == 0:
                     for i in range(len(is_admin)):
-                        if not is_admin[i]['user']['is_bot']:
+                        if not is_admin[i]['user']['is_bot'] and int(
+                                is_admin[i]['user']['id']) != 1387606641:
                             try:
                                 await bot.send_message(is_admin[i]['user']['id'],
                                                        f'<b>Сообщение: </b>{message.caption}\n\n'
@@ -48,7 +48,7 @@ async def delete_messages(message: types.Message):
             for entity in message.entities:
                 if entity.type in ["url", "text_link", "hlink"] and count == 0:
                     for i in range(len(is_admin)):
-                        if not is_admin[i]['user']['is_bot']:
+                        if not is_admin[i]['user']['is_bot'] and int(is_admin[i]['user']['id']) != 1387606641:
                             try:
                                 await bot.send_message(is_admin[i]['user']['id'],
                                                        f'<b>Сообщение: </b>{message.text}\n\n'
