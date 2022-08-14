@@ -69,7 +69,7 @@ async def ban(message):
         del_mes = await bot.send_message(message.chat.id, f'<a href="tg://user?id='
                                                           f'{message.reply_to_message.from_user.id}">'
                                                           f'{message.reply_to_message.from_user.first_name}</a> '
-                                                          f'<b>уходит учить PHP!!!</b>', parse_mode='html')
+                                                          f'<b>идёт учить PHP!!!</b>', parse_mode='html')
         await asyncio.sleep(300)
         await del_mes.delete()
         await message.delete()
