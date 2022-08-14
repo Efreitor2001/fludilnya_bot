@@ -4,6 +4,11 @@ from create_bot import bot
 
 def bad_words(message):
     check = False
+    if message.content_type == 'photo' or message.content_type == 'video' or message.content_type == 'document' or \
+            message.content_type == 'audio' or message.content_type == 'album':
+        mestype = message.caption
+    else:
+        mestype = message.text
     pri = 'в, во, до, вы, пра, из, изо, пред, по, предо, па, пере, без, бес, низ, нис, раз, рас, через, черес, при,' \
           ' пре, о,  , у, под, пад, подъ, падъ, подь, падь, да, от, ат, вы, на, наст'.replace(' ', '').split(',')
     bw = '6ля, 6лядь, 6лять, b3ъeб, cock, cunt, e6aль, ebal, eblan, eбaл, eбaть, eбyч, eбать, eбёт, eблантий, fuck,' \
@@ -69,7 +74,7 @@ def bad_words(message):
     for i in pri:
         for j in bw:
             for g in ok:
-                for z in message.text.lower().replace('ё', 'е').replace('a', 'а').replace('y', 'у').replace('e', 'е') \
+                for z in mestype.lower().replace('ё', 'е').replace('a', 'а').replace('y', 'у').replace('e', 'е') \
                         .replace('x', 'х').replace('c', 'с').replace('p', 'р').replace('k', 'к').replace('b', 'б') \
                         .replace('z', 'з').replace('o', 'о').split():
                     res = str(i + j + g)
