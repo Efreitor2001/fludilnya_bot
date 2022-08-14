@@ -1,5 +1,6 @@
 from aiogram import types, Dispatcher
 from create_bot import bot
+import re
 
 
 def bad_words(message):
@@ -72,12 +73,13 @@ def bad_words(message):
          ' пиздюшк, охуе, заеби, пидр, дроч'.replace(' ', '').split(',')
     ok = 'а, я, о, е, ь, ы, и, у, ю, ой, ей, ом, ем, асина, ина, ище,  , ий, ый, ца, ся, ься, ща, нуть, нутся, нуться' \
          'ось, ясь, ысь, ись, еш, ешь, ш, шь, ила, ено, енно, ню, ну, ня, ил, ли, ась'.replace(' ', '').split(',')
+    s = re.sub("[$|@&*.,/?;:`~()^%'<>_+={}№]", "", mestype)
     for i in pri:
         for j in bw:
             for g in ok:
-                for z in mestype.lower().replace('ё', 'е').replace('a', 'а').replace('y', 'у').replace('e', 'е') \
+                for z in s.lower().replace('ё', 'е').replace('a', 'а').replace('y', 'у').replace('e', 'е') \
                         .replace('x', 'х').replace('c', 'с').replace('p', 'р').replace('k', 'к').replace('b', 'б') \
-                        .replace('z', 'з').replace('o', 'о').split():
+                        .replace('z', 'з').replace('o', 'о').replace('.', '').replace('"', '').split():
                     res = str(i + j + g)
                     if res == z:
                         check = True
