@@ -39,7 +39,7 @@ async def del_new(message):
 async def delete_messages(message: types.Message):
     if bad_words(message) is True:
         await message.reply(f'<b><a href="tg://user?id={message.from_user.id}">{message.from_user.first_name}</a>, '
-                            f'у нас не матерятся!</b>\n➡️<a href="https://t.me/c/1745662062/9166>ПРАВИЛА</a>"🙊',
+                            f'у нас не матерятся!</b>\n➡️<a href="https://t.me/c/1745662062/9166">ПРАВИЛА</a>🙊',
                             parse_mode='html')
         await message.delete()
         await bot.send_sticker(message.chat.id,
