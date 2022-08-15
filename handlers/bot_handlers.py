@@ -48,7 +48,7 @@ async def delete_messages(message: types.Message):
     wl = ['https://t.me/c/', 'github.com']
     for i in range(len(is_admin)):
         if int(message.from_user.id) == int(is_admin[i]['user']['id']):
-            check = 0
+            check = 1
     if message.content_type == 'photo' or message.content_type == 'video' or message.content_type == 'document' or \
             message.content_type == 'audio' or message.content_type == 'album':
         for i in wl:
