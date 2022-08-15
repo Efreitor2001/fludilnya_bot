@@ -15,7 +15,7 @@ def bad_words(message):
         if mestype[i] != mestype[i + 1]:
             s1 += mestype[i]
     s1 += mestype[i + 1]
-    s = re.sub("[$|@&*.,/?;:`~()^%'<>_+={}№—1234567890]", "", s1)
+    s = re.sub("[$|@&*.,/?;:`~()^%'<>_+={}№—123457890]", "", s1)
     f = open("cenz.txt")
     s = s.lower().replace('ё', 'е').replace('a', 'а').replace('y', 'у').replace('e', 'е').replace('x', 'х') \
         .replace('c', 'с').replace('p', 'р').replace('k', 'к').replace('b', 'б').replace('z', 'з') \
