@@ -3,6 +3,12 @@ from create_bot import bot
 import re
 
 
+# import pytz
+# from datetime import datetime
+# tz = pytz.timezone('Europe/Moscow')
+# time = datetime.now(tz=tz).time().hour
+
+
 def bad_words(message):
     check = False
     if message.content_type == 'photo' or message.content_type == 'video' or message.content_type == 'document' or \
@@ -37,6 +43,7 @@ async def del_new(message):
 
 # @dp.message_handler(content_types=['any'])
 async def delete_messages(message: types.Message):
+    # print(message.chat.id)
     if bad_words(message) is True:
         await message.reply(f'<b><a href="tg://user?id={message.from_user.id}">{message.from_user.first_name}</a>, '
                             f'у нас не матерятся!</b>\n➡️<a href="https://t.me/c/1745662062/9166">ПРАВИЛА</a>🙊',
