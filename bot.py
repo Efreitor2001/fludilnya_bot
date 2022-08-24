@@ -29,7 +29,7 @@ async def rules():
 
 
 async def doit():
-    aioschedule.every().day.at("10:02").do(rules)
+    aioschedule.every().day.at("08:00").do(rules)
     while True:
         await aioschedule.run_pending()
         await asyncio.sleep(1)
