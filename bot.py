@@ -3,9 +3,6 @@ from create_bot import dp, bot
 from handlers import bot_handlers, bot_commands
 import asyncio
 import aioschedule
-from datetime import datetime
-
-print(datetime.now().time().hour)
 
 
 async def rules():
@@ -32,7 +29,7 @@ async def rules():
 
 
 async def doit():
-    aioschedule.every().day.at("12:30").do(rules)
+    aioschedule.every().day.at("10:02").do(rules)
     while True:
         await aioschedule.run_pending()
         await asyncio.sleep(1)
