@@ -53,7 +53,7 @@ async def delete_messages(message: types.Message):
                                'CAACAgIAAxkBAAEFjwABYvjHWC8yVvt-gQcTL8wytAVmRnMAAjosAAL8eDlLFcEUfmcSuwkpBA')
     check = 0
     is_admin = await bot.get_chat_administrators(message.chat.id)
-    wl = ['https://t.me/c/1745662062/', 'https://t.me/c/1520980874/', 'github.com']
+    wl = ['https://t.me/c/1745662062/', 'github.com']
     for i in range(len(is_admin)):
         if int(message.from_user.id) == int(is_admin[i]['user']['id']):
             check = 1
