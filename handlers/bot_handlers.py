@@ -53,7 +53,7 @@ async def delete_messages(message: types.Message):
                                'CAACAgIAAxkBAAEFjwABYvjHWC8yVvt-gQcTL8wytAVmRnMAAjosAAL8eDlLFcEUfmcSuwkpBA')
     check = 0
     is_admin = await bot.get_chat_administrators(message.chat.id)
-    wl = ['https://t.me/c/', 'github.com']
+    wl = ['https://t.me/c/1745662062/', 'https://t.me/c/1520980874/', 'github.com']
     for i in range(len(is_admin)):
         if int(message.from_user.id) == int(is_admin[i]['user']['id']):
             check = 1
@@ -71,37 +71,12 @@ async def delete_messages(message: types.Message):
         if message.content_type == 'photo' or message.content_type == 'video' or message.content_type == 'document' or \
                 message.content_type == 'audio' or message.content_type == 'album':
             for caption_entity in message.caption_entities:
-                if caption_entity.type in ["url", "text_link", "hlink"] and count == 0:
-                    for i in range(len(is_admin)):
-                        if not is_admin[i]['user']['is_bot'] and int(
-                                is_admin[i]['user']['id']) != 1387606641:
-                            try:
-                                await bot.send_message(is_admin[i]['user']['id'],
-                                                       f'<b>Сообщение: </b>{message.caption}\n\n'
-                                                       f'<b>Отправитель: </b><a href="tg://user?id='
-                                                       f'{message.from_user.id}">'
-                                                       f'{message.from_user.full_name}</a>'
-                                                       f'\n\n<b>Ссылка на сообщение: </b>{message.url}',
-                                                       parse_mode="html")
-                                count += 1
-                            except:
-                                i += 1
+                if caption_entity.type in ["url", "text_link", "hlink"]:
+                    await message.delete()
         else:
             for entity in message.entities:
-                if entity.type in ["url", "text_link", "hlink"] and count == 0:
-                    for i in range(len(is_admin)):
-                        if not is_admin[i]['user']['is_bot'] and int(is_admin[i]['user']['id']) != 1387606641:
-                            try:
-                                await bot.send_message(is_admin[i]['user']['id'],
-                                                       f'<b>Сообщение: </b>{message.text}\n\n'
-                                                       f'<b>Отправитель: </b><a href="tg://user?id='
-                                                       f'{message.from_user.id}">'
-                                                       f'{message.from_user.full_name}</a>'
-                                                       f'\n\n<b>Ссылка на сообщение: </b>{message.url}',
-                                                       parse_mode="html")
-                                count += 1
-                            except:
-                                i += 1
+                if entity.type in ["url", "text_link", "hlink"]:
+                    await message.delete()
     ck1 = 0
     ck2 = 0
     check1 = ['gitignore', 'git ignore', 'гитигнор', 'гит игнор']

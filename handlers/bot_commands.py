@@ -95,6 +95,13 @@ async def unban(message: types.Message):
         await message.delete()
 
 
+async def donate(message):
+    await message.reply('<b>Поддержать бота:</b>\n'
+                        'https://www.donationalerts.com/askme/ELC2001', parse_mode='html')
+
+
 def register_handlers_bot_commands(dp: Dispatcher):
     dp.register_message_handler(ban, commands=['бан', 'ban'], commands_prefix='!')
     dp.register_message_handler(unban, commands=['разбан', 'unban'], commands_prefix='!', is_chat_admin=True)
+    dp.register_message_handler(donate, commands=['donate', 'donat', 'донат', 'Donate', 'Donat', 'Донат'],
+                                commands_prefix='!')

@@ -26,10 +26,12 @@ async def rules():
                                            '\n❗️Если кто-то по вашему мнению нарушает правила, '
                                            'отправляйте в ответ на сообщение `!бан причина бана`',
                            parse_mode='markdown')
+    await bot.send_message(-1001520980874, '<b>Поддержать бота:</b>\n'
+                                           'https://www.donationalerts.com/askme/ELC2001', parse_mode='html')
 
 
 async def doit():
-    aioschedule.every().day.at("08:00").do(rules)
+    aioschedule.every().day.at("19:16").do(rules)
     while True:
         await aioschedule.run_pending()
         await asyncio.sleep(1)
@@ -43,4 +45,4 @@ bot_commands.register_handlers_bot_commands(dp)
 bot_handlers.register_handlers_bot_handlers(dp)
 
 print('run')
-executor.start_polling(dp, on_startup=create)
+executor.start_polling(dp, on_startup=create, skip_updates=True)
