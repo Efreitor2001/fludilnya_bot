@@ -67,7 +67,6 @@ async def delete_messages(message: types.Message):
             if i in message.text:
                 check = 1
     if check == 0:
-        count = 0
         if message.content_type == 'photo' or message.content_type == 'video' or message.content_type == 'document' or \
                 message.content_type == 'audio' or message.content_type == 'album':
             for caption_entity in message.caption_entities:
@@ -80,7 +79,7 @@ async def delete_messages(message: types.Message):
     ck1 = 0
     ck2 = 0
     check1 = ['gitignore', 'git ignore', 'гитигнор', 'гит игнор']
-    check2 = ['пришлите', 'скиньте', 'дайте', 'скинь']
+    check2 = ['пришлите', 'скиньте', 'дайте', 'скинь', 'киньте', 'кинь']
     s = message.text.lower()
     for i in check1:
         if i in s:
